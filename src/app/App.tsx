@@ -280,10 +280,9 @@ export default function App() {
         transition: "all .4s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <div style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: "23px", letterSpacing: "-.5px", flexShrink: 0 }}>
-          <span style={{ color: "#FF3B30" }}>FIT</span><span>ZONE</span>
-          <span style={{ color: "rgba(255,255,255,.35)", fontSize: "10px", marginLeft: "6px", fontWeight: 500, letterSpacing: "2px" }}>GYM</span>
-        </div>
+        <div style={{ flexShrink: 0 }}>
+  <img src="/logo.png" alt="FitZoneGym Logo" style={{ height: "100px", mixBlendMode: "screen", filter: "contrast(1.2) brightness(1.1)", objectFit: "contain" }} />
+</div>
 
         <div className="nav-links-d" style={{ display: "flex", gap: "28px" }}>
           {NAV_LINKS.map(l => (
