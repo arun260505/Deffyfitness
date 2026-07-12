@@ -111,4 +111,40 @@ Gallery → Testimonials → Achievements → Contact → Footer.
 - Fix the "FITTIESS" spelling inside the logo artwork (image editor).
 - Delete the now-unused source files in the parent folder: `logo1.png`, `logo2.png`,
   and the old artifact `logo.png` / `logo.jpeg`.
-- Wire up the contact & newsletter forms (currently non-functional).
+
+---
+
+## Contact, navigation & mobile (added later)
+
+### Clickable contact + real details
+All contact info is now live and actionable (values in constants at the top of
+`App.tsx`):
+
+| Item | Action |
+|------|--------|
+| **Address** `R5H7+2RM, Chennai, Mambakkam, Tamil Nadu 600127` | opens the DEFY FITNESS **Google Maps** location (address card, map box, footer) |
+| **Phone** `+91 91591 91590` | `tel:` link → opens the dialer / calling app |
+| **Email** `defyfitnesss@gmail.com` | opens **Gmail compose** pre-addressed |
+| **WhatsApp** | `wa.me` link with a pre-filled message ("…I need to enquire about your memberships and programs.") |
+
+WhatsApp appears **twice**: as a card in the Contact section + footer, **and** as a
+floating green button (bottom-right, pulsing) on every screen — handy on mobile.
+
+> ⚠️ The email `defyfitnesss@gmail.com` has three s's — confirm it's correct.
+
+### Clean URLs (no "#")
+Nav links, the logo, the mobile menu, and footer links use the History API to show
+`/home`, `/programs`, `/contact` … instead of `#home`. Deep-links work: loading
+`/programs` scrolls to that section on load.
+> **Deployment note:** a static host needs an SPA fallback (rewrite all paths →
+> `index.html`) or a direct reload of `/programs` will 404. Vite dev handles this
+> automatically.
+
+### Scroll-spy active highlight
+The nav link for the section currently in view is highlighted red with an underline
+(`IntersectionObserver`, `.nav-link.active`). The mobile menu highlights it too.
+
+### Mobile
+Hamburger menu now kicks in at ≤900px (avoids crowding), nav padding/logo shrink on
+phones, gallery drops to 2→1 columns, and the WhatsApp button scales down. Verified
+at 390px width.

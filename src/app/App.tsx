@@ -9,9 +9,19 @@ import {
 
 const NAV_LINKS = ["Home", "About Us", "Programs", "Membership", "Trainers", "Gallery", "Testimonials", "Contact"];
 
+// ─── Contact / location ──────────────────────────────────────────────────────
+const ADDRESS = "R5H7+2RM, Chennai, Mambakkam, Tamil Nadu 600127";
+const PHONE_DISPLAY = "+91 91591 91590";
+const PHONE_TEL = "+919159191590";
+const EMAIL = "defyfitnesss@gmail.com";
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=DEFY+FITNESS+Mambakkam+Chennai";
+const GMAIL_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent("Enquiry — DEFY FITNESS")}`;
+const WHATSAPP_NUMBER = "919159191590";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi DEFY FITNESS, I need to enquire about your memberships and programs.")}`;
+
 const HERO_STATS = [
   { value: "500+", label: "Members" },
-  { value: "4+", label: "Expert Trainers" },
+  { value: "5+", label: "Expert Trainers" },
   { value: "10 Yrs", label: "Experience" },
   { value: "5:30 am - 10pm", label: "Open" },
 ];
@@ -78,7 +88,7 @@ const TESTIMONIALS = [
 
 const ACHIEVEMENTS = [
   { target: 500, suffix: "+", label: "Active Members" },
-  { target: 3, suffix: "+", label: "Expert Trainers" },
+  { target: 5, suffix: "+", label: "Expert Trainers" },
   { target: 10, suffix: "+", label: "Awards Won" },
   { target: 100, suffix: "%", label: "Success Rate" },
 ];
@@ -102,6 +112,14 @@ function AnimatedCounter({ target, suffix = "", started }: { target: number; suf
   return <>{count.toLocaleString()}{suffix}</>;
 }
 
+function WhatsAppIcon({ size = 20, color = "currentColor", style }: { size?: number; color?: string; style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill={color} aria-hidden="true" style={style}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function App() {
@@ -109,6 +127,7 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeTesti, setActiveTesti] = useState(0);
   const [countersOn, setCountersOn] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const achievRef = useRef<HTMLDivElement>(null);
 
   // Sticky nav
@@ -142,6 +161,39 @@ export default function App() {
     return () => clearInterval(id);
   }, []);
 
+  // Scroll spy: highlight the nav link of the section currently in view
+  useEffect(() => {
+    const ids = NAV_LINKS.map(l => l.toLowerCase().replace(" ", "-"));
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id); }),
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach(s => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
+  // All "Join Now" CTAs open WhatsApp
+  const joinWhatsApp = () => { setMobileOpen(false); window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer"); };
+
+  // Clean URL navigation: /home, /programs … (no "#") + deep-link on load
+  const navigate = (id: string, close = false) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (close) setMobileOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    window.history.pushState(null, "", `/${id}`);
+  };
+  useEffect(() => {
+    const scrollToPath = (behavior: ScrollBehavior) => {
+      const id = window.location.pathname.replace(/^\//, "") || "home";
+      if (id !== "home") document.getElementById(id)?.scrollIntoView({ behavior });
+    };
+    const t = setTimeout(() => scrollToPath("auto"), 300); // deep link on first load
+    const onPop = () => scrollToPath("smooth");
+    window.addEventListener("popstate", onPop);
+    return () => { clearTimeout(t); window.removeEventListener("popstate", onPop); };
+  }, []);
+
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#0D0D0D", color: "#fff", overflowX: "hidden" }}>
@@ -152,6 +204,15 @@ export default function App() {
         ::-webkit-scrollbar{width:5px}
         ::-webkit-scrollbar-track{background:#0D0D0D}
         ::-webkit-scrollbar-thumb{background:#EA0A1A;border-radius:3px}
+
+        .nav-link{color:rgba(255,255,255,.65);font-size:13.5px;font-weight:500;text-decoration:none;font-family:'Poppins',sans-serif;transition:color .25s;position:relative;padding:4px 0}
+        .nav-link:hover{color:#EA0A1A}
+        .nav-link.active{color:#EA0A1A}
+        .nav-link.active::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;background:#EA0A1A;border-radius:2px}
+
+        .wa-fab{position:fixed;bottom:26px;right:26px;z-index:1200;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);transition:transform .25s,box-shadow .25s;animation:wa-pulse 2.4s infinite}
+        .wa-fab:hover{transform:scale(1.08);box-shadow:0 14px 40px rgba(37,211,102,.6)}
+        @keyframes wa-pulse{0%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,0)}}
 
         .fz{opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease}
         .fz-vis{opacity:1;transform:translateY(0)}
@@ -207,8 +268,6 @@ export default function App() {
         .plan-card.plain:hover{transform:translateY(-6px);border-color:rgba(234,10,26,.4)!important}
         .plan-card.hot{background:linear-gradient(140deg,#EA0A1A 0%,#B0121A 100%);transform:scale(1.04);box-shadow:0 32px 80px rgba(234,10,26,.4)}
 
-        .soc-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;flex-shrink:0}
-        .soc-icon:hover{background:#EA0A1A}
 
         input::placeholder,textarea::placeholder{color:rgba(255,255,255,.3)}
         input:focus,textarea:focus{border-color:rgba(234,10,26,.5)!important;outline:none}
@@ -223,6 +282,8 @@ export default function App() {
           .footer-grid{grid-template-columns:repeat(2,1fr)!important}
         }
         @media(max-width:900px){
+          .nav-links-d{display:none!important}
+          .ham{display:flex!important}
           .hero-h1{font-size:52px!important}
           .sec-h2{font-size:36px!important}
           .about-grid{grid-template-columns:1fr!important}
@@ -235,9 +296,8 @@ export default function App() {
           .blog-grid{grid-template-columns:1fr!important}
         }
         @media(max-width:640px){
-          .nav-links-d{display:none!important}
-          .ham{display:flex!important}
-          .nav-logo{height:56px!important}
+          .nav-bar{padding-left:20px!important;padding-right:20px!important}
+          .nav-logo{height:52px!important}
           .hero-h1{font-size:38px!important}
           .hero-pad{padding:0 24px!important;padding-top:110px!important}
           .sec-pad{padding:80px 24px!important}
@@ -245,12 +305,13 @@ export default function App() {
           .trainer-grid{grid-template-columns:1fr!important}
           .prog-grid{grid-template-columns:1fr!important}
           .footer-grid{grid-template-columns:1fr!important}
-          .gal-cols{columns:2!important}
+          .gal-grid{grid-template-columns:repeat(2,1fr)!important}
+          .wa-fab{width:52px;height:52px;bottom:20px;right:18px}
         }
       `}</style>
 
       {/* ══════════════════════════════════════════════════════════ NAVBAR */}
-      <nav style={{
+      <nav className="nav-bar" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
         padding: navSolid ? "8px 60px" : "12px 60px",
         background: navSolid ? "rgba(13,13,13,.97)" : "transparent",
@@ -259,7 +320,7 @@ export default function App() {
         transition: "all .4s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <a href="#home" style={{ flexShrink: 0, display: "block", lineHeight: 0 }}>
+        <a href="/home" onClick={navigate("home")} style={{ flexShrink: 0, display: "block", lineHeight: 0 }}>
           <img
             className="nav-logo"
             src="/logo.png"
@@ -276,19 +337,17 @@ export default function App() {
         </a>
 
         <div className="nav-links-d" style={{ display: "flex", gap: "28px" }}>
-          {NAV_LINKS.map(l => (
-            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} style={{
-              color: "rgba(255,255,255,.65)", fontSize: "13.5px", fontWeight: 500,
-              textDecoration: "none", transition: "color .2s", fontFamily: "'Poppins', sans-serif",
-            }}
-              onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.65)"}
+          {NAV_LINKS.map(l => {
+            const id = l.toLowerCase().replace(" ", "-");
+            return (
+            <a key={l} href={`/${id}`} onClick={navigate(id)}
+              className={`nav-link${activeSection === id ? " active" : ""}`}
             >{l}</a>
-          ))}
+          );})}
         </div>
 
         <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
-          <button className="red-btn" style={{ padding: "10px 22px", fontSize: "13px" }}>Join Now</button>
+          <button className="red-btn" onClick={joinWhatsApp} style={{ padding: "10px 22px", fontSize: "13px" }}>Join Now</button>
           <button className="ham" onClick={() => setMobileOpen(true)}
             style={{ display: "none", background: "none", border: "none", color: "#fff", cursor: "pointer", padding: "4px" }}>
             <Menu size={24} />
@@ -306,13 +365,15 @@ export default function App() {
           <button onClick={() => setMobileOpen(false)} style={{ position: "absolute", top: "22px", right: "24px", background: "none", border: "none", color: "#fff", cursor: "pointer" }}>
             <X size={28} />
           </button>
-          {NAV_LINKS.map(l => (
-            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} onClick={() => setMobileOpen(false)}
-              style={{ color: "#fff", fontSize: "26px", fontWeight: 800, textDecoration: "none", fontFamily: "'Poppins', sans-serif" }}>
+          {NAV_LINKS.map(l => {
+            const id = l.toLowerCase().replace(" ", "-");
+            return (
+            <a key={l} href={`/${id}`} onClick={navigate(id, true)}
+              style={{ color: activeSection === id ? "#EA0A1A" : "#fff", fontSize: "26px", fontWeight: 800, textDecoration: "none", fontFamily: "'Poppins', sans-serif" }}>
               {l}
             </a>
-          ))}
-          <button className="red-btn" style={{ marginTop: "12px" }}>Join Now</button>
+          );})}
+          <button className="red-btn" onClick={joinWhatsApp} style={{ marginTop: "12px" }}>Join Now</button>
         </div>
       )}
 
@@ -350,7 +411,7 @@ export default function App() {
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "72px" }}>
-            <button className="red-btn">
+            <button className="red-btn" onClick={joinWhatsApp}>
               Join Now <ArrowRight size={15} style={{ display: "inline", marginLeft: "8px", verticalAlign: "middle" }} />
             </button>
             {/* <button className="ghost-btn">Free Trial</button> */}
@@ -508,7 +569,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <button style={{
+              <button onClick={joinWhatsApp} style={{
                 width: "100%", padding: "14px",
                 background: plan.highlighted ? "#fff" : "#EA0A1A",
                 color: plan.highlighted ? "#EA0A1A" : "#fff",
@@ -540,12 +601,7 @@ export default function App() {
                 <img src={t.img} alt={t.name} style={{ height: "540px" }} />
                 <div className="t-over">
                   <div style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "17px", marginBottom: "3px" }}>{t.name}</div>
-                  <div style={{ color: "#EA0A1A", fontSize: "13px", fontWeight: 600, marginBottom: "12px" }}>{t.specialty}</div>
-                   {!["Kotti", "Sathish"].includes(t.name) && <div style={{ display: "flex", gap: "8px" }}>
-                    {[Instagram, Twitter, Facebook].map((Icon, j) => (
-                      <div key={j} className="soc-icon"><Icon size={13} color="#fff" /></div>
-                    ))}
-                  </div>}
+                  <div style={{ color: "#EA0A1A", fontSize: "13px", fontWeight: 600 }}>{t.specialty}</div>
                 </div>
               </div>
             ))}
@@ -588,8 +644,9 @@ export default function App() {
               "{TESTIMONIALS[activeTesti].review}"
             </p>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "14px" }}>
-              {TESTIMONIALS[activeTesti].img && <img src={TESTIMONIALS[activeTesti].img} alt={TESTIMONIALS[activeTesti].name}
-                style={{ width: "54px", height: "54px", borderRadius: "50%", objectFit: "cover", border: "2px solid #EA0A1A" }} />}
+              <div style={{ width: "54px", height: "54px", borderRadius: "50%", background: "linear-gradient(140deg,#EA0A1A 0%,#2B4FE0 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: "20px", color: "#fff", flexShrink: 0 }}>
+                {TESTIMONIALS[activeTesti].name.charAt(0)}
+              </div>
               <div style={{ textAlign: "left" }}>
                 <div style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px" }}>{TESTIMONIALS[activeTesti].name}</div>
                 <div style={{ color: "rgba(255,255,255,.45)", fontSize: "13px" }}>{TESTIMONIALS[activeTesti].role}</div>
@@ -659,26 +716,35 @@ export default function App() {
                 </p>
               </div>
               {[
-                { Icon: MapPin, label: "Address", value: "SH 121, Mambakkam, Tamil Nadu 600127, India" },
-                { Icon: Phone, label: "Phone", value: "+91 91591 91590" },
-                { Icon: Mail, label: "Email", value: "defyfitnesss@gmail.com" },
+                { Icon: MapPin, label: "Address", value: ADDRESS, href: MAPS_URL, external: true },
+                { Icon: Phone, label: "Phone", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
+                { Icon: WhatsAppIcon, label: "WhatsApp", value: `Chat with us — ${PHONE_DISPLAY}`, href: WHATSAPP_URL, external: true },
+                { Icon: Mail, label: "Email", value: EMAIL, href: GMAIL_URL, external: true },
                 { Icon: Clock, label: "Hours", value: "Monday – Saturday: 5:30am – 10:00pm\nSunday: 7:00am – 6:00pm" },
-              ].map(({ Icon, label, value }) => (
-                <div key={label} className="glass" style={{ padding: "18px 22px", border: "1px solid rgba(255,255,255,.07)", display: "flex", gap: "14px", alignItems: "flex-start", width: "100%", textAlign: "left" }}>
-                  <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(234,10,26,.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Icon size={18} color="#EA0A1A" />
-                  </div>
-                  <div>
-                    <div style={{ color: "rgba(255,255,255,.4)", fontSize: "11px", fontWeight: 600, letterSpacing: ".8px", textTransform: "uppercase", marginBottom: "3px" }}>{label}</div>
-                    <div style={{ fontSize: "14.5px", color: "rgba(255,255,255,.82)", whiteSpace: "pre-line" }}>{value}</div>
-                  </div>
-                </div>
-              ))}
-              {/* Map placeholder */}
-              <a href="https://www.google.com/maps/place/SH+121,+Tamil+Nadu/@12.8467,80.1464,17z/data=!4m6!3m5!1s0x3a52f61eb63874b3:0xb06512d14256e4df!8m2!3d12.8414952!4d80.1516241!16s%2Fg%2F11clt067cg?hl=en&entry=ttu" target="_blank" rel="noopener noreferrer"
+              ].map(({ Icon, label, value, href, external }) => {
+                const inner = (
+                  <>
+                    <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(234,10,26,.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <Icon size={18} color="#EA0A1A" />
+                    </div>
+                    <div>
+                      <div style={{ color: "rgba(255,255,255,.4)", fontSize: "11px", fontWeight: 600, letterSpacing: ".8px", textTransform: "uppercase", marginBottom: "3px" }}>{label}</div>
+                      <div style={{ fontSize: "14.5px", color: "rgba(255,255,255,.82)", whiteSpace: "pre-line" }}>{value}</div>
+                    </div>
+                  </>
+                );
+                const boxStyle = { padding: "18px 22px", border: "1px solid rgba(255,255,255,.07)", display: "flex", gap: "14px", alignItems: "flex-start", width: "100%", textAlign: "left" as const, textDecoration: "none", color: "inherit" };
+                return href ? (
+                  <a key={label} className="glass" href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} style={{ ...boxStyle, cursor: "pointer" }}>{inner}</a>
+                ) : (
+                  <div key={label} className="glass" style={boxStyle}>{inner}</div>
+                );
+              })}
+              {/* Map — opens the DEFY FITNESS Google Maps location */}
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
                 style={{ display: "flex", width: "100%", height: "250px", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255,255,255,.07)", background: "#161616", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "8px", cursor: "pointer", textDecoration: "none" }}>
                 <MapPin size={30} color="rgba(234,10,26,.6)" />
-                <div style={{ color: "rgba(255,255,255,.5)", fontSize: "14px", fontWeight: 600 }}>SH 121, Mambakkam, Tamil Nadu 600127</div>
+                <div style={{ color: "rgba(255,255,255,.5)", fontSize: "14px", fontWeight: 600 }}>{ADDRESS}</div>
                 <div style={{ color: "rgba(255,255,255,.25)", fontSize: "12px" }}>Click to open in Google Maps</div>
               </a>
             </div>
@@ -724,12 +790,14 @@ export default function App() {
             <div>
               <h4 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px", marginBottom: "18px" }}>Quick Links</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Home", "About Us", "Membership", "Trainers", "Gallery", "Contact"].map(l => (
-                  <a key={l} href="#" style={{ color: "rgba(255,255,255,.45)", fontSize: "14px", textDecoration: "none", transition: "color .2s" }}
+                {["Home", "About Us", "Membership", "Trainers", "Gallery", "Contact"].map(l => {
+                  const id = l.toLowerCase().replace(" ", "-");
+                  return (
+                  <a key={l} href={`/${id}`} onClick={navigate(id)} style={{ color: "rgba(255,255,255,.45)", fontSize: "14px", textDecoration: "none", transition: "color .2s" }}
                     onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
                     onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.45)"}
                   >{l}</a>
-                ))}
+                );})}
               </div>
             </div>
 
@@ -738,7 +806,7 @@ export default function App() {
               <h4 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px", marginBottom: "18px" }}>Programs</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 {PROGRAMS.map(p => (
-                  <a key={p.name} href="#" style={{ color: "rgba(255,255,255,.45)", fontSize: "14px", textDecoration: "none", transition: "color .2s" }}
+                  <a key={p.name} href="/programs" onClick={navigate("programs")} style={{ color: "rgba(255,255,255,.45)", fontSize: "14px", textDecoration: "none", transition: "color .2s" }}
                     onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
                     onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.45)"}
                   >{p.name}</a>
@@ -751,15 +819,18 @@ export default function App() {
               <h4 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px", marginBottom: "18px" }}>Contact</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {[
-                  { Icon: MapPin, text: "SH 121, Mambakkam, Tamil Nadu 600127, India" },
-                  { Icon: Phone, text: "+91 91591 91590" },
-                  { Icon: Mail, text: "defyfitnesss@gmail.com" },
-                  
-                ].map(({ Icon, text }) => (
-                  <div key={text} style={{ display: "flex", gap: "10px", color: "rgba(255,255,255,.45)", fontSize: "13.5px", alignItems: "flex-start" }}>
+                  { Icon: MapPin, text: ADDRESS, href: MAPS_URL, external: true },
+                  { Icon: Phone, text: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
+                  { Icon: WhatsAppIcon, text: `WhatsApp — ${PHONE_DISPLAY}`, href: WHATSAPP_URL, external: true },
+                  { Icon: Mail, text: EMAIL, href: GMAIL_URL, external: true },
+                ].map(({ Icon, text, href, external }) => (
+                  <a key={text} href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    style={{ display: "flex", gap: "10px", color: "rgba(255,255,255,.45)", fontSize: "13.5px", alignItems: "flex-start", textDecoration: "none", transition: "color .2s" }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#EA0A1A"}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,.45)"}>
                     <Icon size={15} color="#EA0A1A" style={{ flexShrink: 0, marginTop: "2px" }} />
                     <span>{text}</span>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -769,7 +840,7 @@ export default function App() {
             <div style={{ color: "rgba(255,255,255,.28)", fontSize: "13px" }}>© 2026 DEFY FITNESS. All rights reserved.</div>
             <div style={{ display: "flex", gap: "22px" }}>
               {["Train", "Stay", "Strong"].map(l => (
-                <a key={l} href="#" style={{ color: "rgba(255,255,255,.28)", fontSize: "13px", textDecoration: "none", transition: "color .2s" }}
+                <a key={l} href="/home" onClick={navigate("home")} style={{ color: "rgba(255,255,255,.28)", fontSize: "13px", textDecoration: "none", transition: "color .2s" }}
                   onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
                   onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.28)"}
                 >{l}</a>
@@ -778,6 +849,11 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* ── Floating WhatsApp button ── */}
+      <a className="wa-fab" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <WhatsAppIcon size={30} color="#fff" />
+      </a>
     </div>
   );
 }
