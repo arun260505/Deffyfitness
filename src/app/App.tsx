@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Dumbbell, CreditCard, Target, MapPin, Phone, Mail, Clock,
   Instagram, Twitter, Facebook, Youtube, ChevronLeft, ChevronRight,
-  Star, Menu, X, Check, Zap, TrendingUp, Award,
+  Star, Menu, X, Check, ArrowRight, Zap, TrendingUp, Award,
 } from "lucide-react";
 
 // ─── Data ───────────────────────────────────────────────────────────────────
@@ -406,9 +406,15 @@ export default function App() {
             When Others Say You Can't
           </div>
 
-          <p style={{ color: "rgba(255,255,255,.6)", fontSize: "18px", maxWidth: "500px", lineHeight: 1.75, marginBottom: "64px" }}>
+          <p style={{ color: "rgba(255,255,255,.6)", fontSize: "18px", maxWidth: "500px", lineHeight: 1.75, marginBottom: "38px" }}>
             Join hundreds of members who have already changed their lives at DEFY FITNESS — world-class coaches, elite equipment, and a community that drives you to your peak.
           </p>
+
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "72px" }}>
+            <button className="red-btn" onClick={joinWhatsApp}>
+              Join Now <ArrowRight size={15} style={{ display: "inline", marginLeft: "8px", verticalAlign: "middle" }} />
+            </button>
+          </div>
 
           {/* Stats bar */}
           <div className="hero-stats" style={{
