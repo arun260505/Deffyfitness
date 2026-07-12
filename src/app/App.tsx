@@ -7,19 +7,19 @@ import {
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
-const NAV_LINKS = ["Home", "About Us", "Programs", "Trainers", "Membership", "Gallery", "Testimonials", "Contact"];
+const NAV_LINKS = ["Home", "About Us", "Programs", "Membership", "Trainers", "Gallery", "Testimonials", "Contact"];
 
 const HERO_STATS = [
-  { value: "5,000+", label: "Members" },
-  { value: "25+", label: "Expert Trainers" },
+  { value: "500+", label: "Members" },
+  { value: "4+", label: "Expert Trainers" },
   { value: "10 Yrs", label: "Experience" },
-  { value: "24/7", label: "Open" },
+  { value: "5:30 am - 10pm", label: "Open" },
 ];
 
 const FEATURES = [
   { Icon: Dumbbell, title: "Modern Equipment", desc: "State-of-the-art machines, free weights, and cutting-edge cardio equipment refreshed annually." },
   { Icon: Award, title: "Certified Trainers", desc: "Every coach holds national certification and brings years of real-world elite coaching experience." },
-  { Icon: CreditCard, title: "Flexible Membership", desc: "Month-to-month plans with no long-term contracts. Pause or cancel anytime, zero hassle." },
+  { Icon: CreditCard, title: "Flexible Membership", desc: "Month-to-month plans with no long-term contracts. Pause anytime, zero hassle." },
   { Icon: Target, title: "Personalized Plans", desc: "Science-backed workout and nutrition plans built around your specific goals and timeline." },
 ];
 
@@ -27,7 +27,7 @@ const PROGRAMS = [
   { name: "Weight Training", desc: "Build raw strength and muscle mass through progressive overload techniques.", img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop&auto=format" },
   { name: "Cardio Fitness", desc: "Boost endurance and torch calories with our high-energy cardio sessions.", img: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&h=400&fit=crop&auto=format" },
   { name: "CrossFit", desc: "Functional movements at high intensity for total-body conditioning.", img: "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=600&h=400&fit=crop&auto=format" },
-  { name: "Yoga", desc: "Improve flexibility, reduce stress, and build a stronger mind-body connection.", img: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&h=400&fit=crop&auto=format" },
+  { name: "Zumba", desc: "Improve flexibility, reduce stress, and build a stronger mind-body connection.", img: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&h=400&fit=crop&auto=format" },
   { name: "Bodybuilding", desc: "Sculpt and define every muscle group with structured hypertrophy protocols.", img: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&h=400&fit=crop&auto=format" },
   { name: "Personal Training", desc: "One-on-one coaching tailored exclusively to your fitness level and goals.", img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&auto=format" },
 ];
@@ -49,7 +49,7 @@ const PLANS = [
 
 const TRAINERS = [
   { name: "Kotti", specialty: "Owner & Head Trainer", img: "/trainers/kotti.jpg" },
-  { name: "Sathish", specialty: "Trainer", img: "/trainers/sathish.jpg" },
+  { name: "Sathish", specialty: "Chief Trainer", img: "/trainers/sathish.jpg" },
 ];
 
 const GALLERY = [
@@ -63,27 +63,24 @@ const GALLERY = [
 
 const TESTIMONIALS = [
   {
-    name: "James Wilson", role: "Member since 2022", rating: 5,
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&auto=format",
-    review: "DEFY FITNESS completely transformed my life. In just 8 months I lost 40 lbs and gained confidence I never knew I had. The trainers are world-class and the community is incredibly supportive.",
+    name: "Rupan Nathan", role: "Member since 2024", rating: 5,
+    review: "Had a best experience here . They have well trained coaching Sathish staff and certifies nutritionist in gym . They giving zumba sessions free as well .. I ll suggest my personal trainer Sathish for ur results and achive your goal",
   },
   {
-    name: "Emily Rodriguez", role: "Member since 2021", rating: 5,
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&auto=format",
-    review: "The Premium membership is absolutely worth every penny. The personalized nutrition plan combined with my trainer Marcus has helped me hit PRs I never thought possible. Best gym in the city, period.",
+    name: "Vijey Vignesh", role: "Member since 2024", rating: 5,
+    review: "Great gym with a motivating vibe! The equipment is clean, well-maintained, and there’s never too much waiting time. Trainers are super friendly especially Sathish trainer and they guide with proper form. I’ve already started seeing results. Totally worth the membership!",
   },
   {
-    name: "David Park", role: "Member since 2023", rating: 5,
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&auto=format",
-    review: "Modern equipment, spotless facilities, and trainers who genuinely care about your progress. I drive 30 minutes out of my way just to train here. DEFY FITNESS is in a league of its own.",
+    name: "Arshdeep Kalsi", role: "Member since 2024", rating: 5,
+    review: " Great gym with excellent equipment and very friendly staff. Clean, well maintained, and a welcoming atmosphere. Highly recommended.",
   },
 ];
 
 const ACHIEVEMENTS = [
-  { target: 5000, suffix: "+", label: "Active Members" },
-  { target: 25, suffix: "+", label: "Expert Trainers" },
-  { target: 47, suffix: "", label: "Awards Won" },
-  { target: 98, suffix: "%", label: "Success Rate" },
+  { target: 500, suffix: "+", label: "Active Members" },
+  { target: 3, suffix: "+", label: "Expert Trainers" },
+  { target: 10, suffix: "+", label: "Awards Won" },
+  { target: 100, suffix: "%", label: "Success Rate" },
 ];
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -349,14 +346,14 @@ export default function App() {
           </div>
 
           <p style={{ color: "rgba(255,255,255,.6)", fontSize: "18px", maxWidth: "500px", lineHeight: 1.75, marginBottom: "38px" }}>
-            Join thousands of members who have already changed their lives at DEFY FITNESS — world-class coaches, elite equipment, and a community that drives you to your peak.
+            Join hundreds of members who have already changed their lives at DEFY FITNESS — world-class coaches, elite equipment, and a community that drives you to your peak.
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "72px" }}>
             <button className="red-btn">
               Join Now <ArrowRight size={15} style={{ display: "inline", marginLeft: "8px", verticalAlign: "middle" }} />
             </button>
-            <button className="ghost-btn">Free Trial</button>
+            {/* <button className="ghost-btn">Free Trial</button> */}
           </div>
 
           {/* Stats bar */}
@@ -383,7 +380,7 @@ export default function App() {
       <section id="about-us" className="sec-pad" style={{ padding: "130px 60px", maxWidth: "1440px", margin: "0 auto" }}>
         <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
           <div className="fz" style={{ position: "relative" }}>
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=700&fit=crop&auto=format" alt="DEFY FITNESS gym interior"
+            <img src="/gallery/defy.jpeg" alt="DEFY FITNESS gym interior"
               style={{ width: "100%", height: "580px", objectFit: "cover", borderRadius: "20px", display: "block" }} />
             <div style={{
               position: "absolute", bottom: "28px", right: "-24px",
@@ -402,7 +399,7 @@ export default function App() {
               We Build Champions,<br /><span className="grad-text">Not Just Bodies</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,.58)", lineHeight: 1.8, marginBottom: "14px", fontSize: "15.5px" }}>
-              Since 2014, DEFY FITNESS has been the training ground for thousands of athletes, everyday heroes, and people ready to reinvent themselves. We combine elite coaching with cutting-edge facilities to deliver results that last.
+              Since 2024, DEFY FITNESS has been the training ground for hundreds of athletes, everyday heroes, and people ready to reinvent themselves. We combine elite coaching with cutting-edge facilities to deliver results that last.
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", margin: "28px 0" }}>
@@ -428,7 +425,7 @@ export default function App() {
                 </div>
               ))}
             </div>
-            <button className="red-btn">Read Our Story</button>
+            
           </div>
         </div>
       </section>
@@ -469,14 +466,7 @@ export default function App() {
               <div className="prog-overlay">
                 <h3 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: "21px", marginBottom: "7px" }}>{p.name}</h3>
                 <p style={{ color: "rgba(255,255,255,.65)", fontSize: "13px", lineHeight: 1.6, marginBottom: "14px" }}>{p.desc}</p>
-                <button style={{
-                  background: "none", border: "1px solid rgba(234,10,26,.6)", color: "#EA0A1A",
-                  borderRadius: "50px", padding: "7px 18px", fontSize: "13px", fontWeight: 600,
-                  cursor: "pointer", fontFamily: "'Poppins', sans-serif", transition: "all .3s", width: "fit-content",
-                }}
-                  onMouseEnter={e => { const el = e.target as HTMLElement; el.style.background = "#EA0A1A"; el.style.color = "#fff"; }}
-                  onMouseLeave={e => { const el = e.target as HTMLElement; el.style.background = "none"; el.style.color = "#EA0A1A"; }}
-                >Learn More</button>
+
               </div>
             </div>
           ))}
@@ -551,11 +541,11 @@ export default function App() {
                 <div className="t-over">
                   <div style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "17px", marginBottom: "3px" }}>{t.name}</div>
                   <div style={{ color: "#EA0A1A", fontSize: "13px", fontWeight: 600, marginBottom: "12px" }}>{t.specialty}</div>
-                  <div style={{ display: "flex", gap: "8px" }}>
+                   {!["Kotti", "Sathish"].includes(t.name) && <div style={{ display: "flex", gap: "8px" }}>
                     {[Instagram, Twitter, Facebook].map((Icon, j) => (
                       <div key={j} className="soc-icon"><Icon size={13} color="#fff" /></div>
                     ))}
-                  </div>
+                  </div>}
                 </div>
               </div>
             ))}
@@ -598,8 +588,8 @@ export default function App() {
               "{TESTIMONIALS[activeTesti].review}"
             </p>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "14px" }}>
-              <img src={TESTIMONIALS[activeTesti].img} alt={TESTIMONIALS[activeTesti].name}
-                style={{ width: "54px", height: "54px", borderRadius: "50%", objectFit: "cover", border: "2px solid #EA0A1A" }} />
+              {TESTIMONIALS[activeTesti].img && <img src={TESTIMONIALS[activeTesti].img} alt={TESTIMONIALS[activeTesti].name}
+                style={{ width: "54px", height: "54px", borderRadius: "50%", objectFit: "cover", border: "2px solid #EA0A1A" }} />}
               <div style={{ textAlign: "left" }}>
                 <div style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px" }}>{TESTIMONIALS[activeTesti].name}</div>
                 <div style={{ color: "rgba(255,255,255,.45)", fontSize: "13px" }}>{TESTIMONIALS[activeTesti].role}</div>
@@ -660,59 +650,37 @@ export default function App() {
               Let&apos;s <span className="grad-text">Talk</span>
             </h2>
           </div>
-          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px" }}>
-            {/* Form */}
-            <div className="glass fz" style={{ padding: "48px", border: "1px solid rgba(255,255,255,.07)" }}>
-              <h3 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "24px", marginBottom: "28px" }}>Send a Message</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                {[{ ph: "Your Full Name", type: "text" }, { ph: "Email Address", type: "email" }, { ph: "Phone Number", type: "tel" }].map(f => (
-                  <input key={f.ph} type={f.type} placeholder={f.ph} style={{
-                    width: "100%", padding: "15px 18px",
-                    background: "rgba(255,255,255,.055)", border: "1px solid rgba(255,255,255,.09)",
-                    borderRadius: "12px", color: "#fff", fontSize: "15px", fontFamily: "'Inter', sans-serif",
-                  }} />
-                ))}
-                <textarea placeholder="Your Message" rows={5} style={{
-                  width: "100%", padding: "15px 18px",
-                  background: "rgba(255,255,255,.055)", border: "1px solid rgba(255,255,255,.09)",
-                  borderRadius: "12px", color: "#fff", fontSize: "15px", resize: "vertical", fontFamily: "'Inter', sans-serif",
-                }} />
-                <button className="red-btn" style={{ padding: "16px", fontSize: "16px" }}>
-                  Send Message <ArrowRight size={15} style={{ display: "inline", marginLeft: "8px", verticalAlign: "middle" }} />
-                </button>
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="fz" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <div>
+          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr", justifyItems: "center" }}>
+            <div className="fz" style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "760px", width: "100%", alignItems: "center", textAlign: "center" }}>
+              <div style={{ width: "100%" }}>
                 <h3 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "24px", marginBottom: "14px" }}>Get In Touch</h3>
                 <p style={{ color: "rgba(255,255,255,.5)", lineHeight: 1.8, fontSize: "15px" }}>
-                  Have questions? Our team is ready to help you start your transformation journey. Reach out any time — we&apos;re open 24/7.
+                  Have questions? Our team is ready to help you start your transformation journey. Reach out any time — we&apos;re open 5:30am to 10:00pm on weekdays and 7:00am to 6:00pm on weekends.
                 </p>
               </div>
               {[
-                { Icon: MapPin, label: "Address", value: "123 Power Street, Athletic District, New York, NY 10001" },
-                { Icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-                { Icon: Mail, label: "Email", value: "info@defyfitness.com" },
-                { Icon: Clock, label: "Hours", value: "Monday – Sunday: Open 24 Hours" },
+                { Icon: MapPin, label: "Address", value: "SH 121, Mambakkam, Tamil Nadu 600127, India" },
+                { Icon: Phone, label: "Phone", value: "+91 91591 91590" },
+                { Icon: Mail, label: "Email", value: "defyfitnesss@gmail.com" },
+                { Icon: Clock, label: "Hours", value: "Monday – Saturday: 5:30am – 10:00pm\nSunday: 7:00am – 6:00pm" },
               ].map(({ Icon, label, value }) => (
-                <div key={label} className="glass" style={{ padding: "18px 22px", border: "1px solid rgba(255,255,255,.07)", display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                <div key={label} className="glass" style={{ padding: "18px 22px", border: "1px solid rgba(255,255,255,.07)", display: "flex", gap: "14px", alignItems: "flex-start", width: "100%", textAlign: "left" }}>
                   <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(234,10,26,.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <Icon size={18} color="#EA0A1A" />
                   </div>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.4)", fontSize: "11px", fontWeight: 600, letterSpacing: ".8px", textTransform: "uppercase", marginBottom: "3px" }}>{label}</div>
-                    <div style={{ fontSize: "14.5px", color: "rgba(255,255,255,.82)" }}>{value}</div>
+                    <div style={{ fontSize: "14.5px", color: "rgba(255,255,255,.82)", whiteSpace: "pre-line" }}>{value}</div>
                   </div>
                 </div>
               ))}
               {/* Map placeholder */}
-              <div style={{ height: "170px", borderRadius: "16px", background: "#161616", border: "1px solid rgba(255,255,255,.07)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "8px" }}>
-                <MapPin size={30} color="rgba(234,10,26,.5)" />
-                <div style={{ color: "rgba(255,255,255,.3)", fontSize: "13px" }}>Interactive Map</div>
-                <div style={{ color: "rgba(255,255,255,.2)", fontSize: "11px" }}>123 Power Street, New York</div>
-              </div>
+              <a href="https://www.google.com/maps/place/SH+121,+Tamil+Nadu/@12.8467,80.1464,17z/data=!4m6!3m5!1s0x3a52f61eb63874b3:0xb06512d14256e4df!8m2!3d12.8414952!4d80.1516241!16s%2Fg%2F11clt067cg?hl=en&entry=ttu" target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", width: "100%", height: "250px", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255,255,255,.07)", background: "#161616", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "8px", cursor: "pointer", textDecoration: "none" }}>
+                <MapPin size={30} color="rgba(234,10,26,.6)" />
+                <div style={{ color: "rgba(255,255,255,.5)", fontSize: "14px", fontWeight: 600 }}>SH 121, Mambakkam, Tamil Nadu 600127</div>
+                <div style={{ color: "rgba(255,255,255,.25)", fontSize: "12px" }}>Click to open in Google Maps</div>
+              </a>
             </div>
           </div>
         </div>
@@ -734,15 +702,20 @@ export default function App() {
                 Your transformation starts here. Premium equipment, elite coaching, and a community that drives you every single day.
               </p>
               <div style={{ display: "flex", gap: "10px" }}>
-                {[Instagram, Twitter, Facebook, Youtube].map((Icon, i) => (
-                  <div key={i} style={{
+                {[
+                  { Icon: Instagram, url: "https://www.instagram.com/defy__fitness/?hl=en" },
+                  { Icon: Facebook, url: "https://www.facebook.com/p/DEFY-Fitness-61560935584834/" },
+                  { Icon: Youtube, url: "https://www.youtube.com/@Defy_fitness" },
+                ].map(({ Icon, url }, i) => (
+                  <a key={i} href={url} target="_blank" rel="noopener noreferrer" style={{
                     width: "36px", height: "36px", borderRadius: "10px",
                     background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.08)",
                     display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all .3s",
+                    textDecoration: "none",
                   }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#EA0A1A"; el.style.borderColor = "#EA0A1A"; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "rgba(255,255,255,.05)"; el.style.borderColor = "rgba(255,255,255,.08)"; }}
-                  ><Icon size={15} color="#fff" /></div>
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#EA0A1A"; (e.currentTarget as HTMLElement).style.borderColor = "#EA0A1A"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.05)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,.08)"; }}
+                  ><Icon size={15} color="#fff" /></a>
                 ))}
               </div>
             </div>
@@ -751,7 +724,7 @@ export default function App() {
             <div>
               <h4 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px", marginBottom: "18px" }}>Quick Links</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Home", "About Us", "Trainers", "Membership", "Gallery", "Contact"].map(l => (
+                {["Home", "About Us", "Membership", "Trainers", "Gallery", "Contact"].map(l => (
                   <a key={l} href="#" style={{ color: "rgba(255,255,255,.45)", fontSize: "14px", textDecoration: "none", transition: "color .2s" }}
                     onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
                     onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.45)"}
@@ -778,10 +751,10 @@ export default function App() {
               <h4 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: "15px", marginBottom: "18px" }}>Contact</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {[
-                  { Icon: MapPin, text: "123 Power Street, Athletic District, NY 10001" },
-                  { Icon: Phone, text: "+1 (555) 123-4567" },
-                  { Icon: Mail, text: "info@defyfitness.com" },
-                  { Icon: Clock, text: "Open 24/7 — Every Day" },
+                  { Icon: MapPin, text: "SH 121, Mambakkam, Tamil Nadu 600127, India" },
+                  { Icon: Phone, text: "+91 91591 91590" },
+                  { Icon: Mail, text: "defyfitnesss@gmail.com" },
+                  
                 ].map(({ Icon, text }) => (
                   <div key={text} style={{ display: "flex", gap: "10px", color: "rgba(255,255,255,.45)", fontSize: "13.5px", alignItems: "flex-start" }}>
                     <Icon size={15} color="#EA0A1A" style={{ flexShrink: 0, marginTop: "2px" }} />
@@ -795,7 +768,7 @@ export default function App() {
           <div style={{ borderTop: "1px solid rgba(255,255,255,.05)", paddingTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "14px" }}>
             <div style={{ color: "rgba(255,255,255,.28)", fontSize: "13px" }}>© 2026 DEFY FITNESS. All rights reserved.</div>
             <div style={{ display: "flex", gap: "22px" }}>
-              {["Privacy Policy", "Terms & Conditions", "Cookie Policy"].map(l => (
+              {["Train", "Stay", "Strong"].map(l => (
                 <a key={l} href="#" style={{ color: "rgba(255,255,255,.28)", fontSize: "13px", textDecoration: "none", transition: "color .2s" }}
                   onMouseEnter={e => (e.target as HTMLElement).style.color = "#EA0A1A"}
                   onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(255,255,255,.28)"}
