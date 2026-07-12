@@ -23,7 +23,7 @@ const HERO_STATS = [
   { value: "500+", label: "Members" },
   { value: "5+", label: "Expert Trainers" },
   { value: "10 Yrs", label: "Experience" },
-  { value: "5:30 am - 10pm", label: "Open" },
+  { value: "5:30 AM", label: "Doors Open" },
 ];
 
 const FEATURES = [
